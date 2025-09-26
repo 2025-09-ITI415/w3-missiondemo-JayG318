@@ -6,11 +6,12 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour{
     const int LOOKBACK_COUNT = 10;
+    static List<Projectile> PROJECTILES = new List<Projectile>();
 
     [SerializeField]
     private bool _awake = true;
     public bool awake {
-        get { return _awake;}
+        get {return _awake;}
         private set {_awake = value;}
     }
 
@@ -22,7 +23,9 @@ public class Projectile : MonoBehaviour{
         rigid = GetComponent<Rigidbody>();
         awake = true;
         prevPos = new Vector3(1000,1000,0);
-        deltas.Add( 1000 );
+        deltas.Add(1000);
+
+        PROJECTILES.Add(this);
     }
 
     // Update is called once per frame
@@ -48,5 +51,15 @@ public class Projectile : MonoBehaviour{
         }
 
 
+    }
+
+    private void OnDestroy() {
+        PROJECTILES.Remove(this);
+    }
+
+    static public void DESTROY_PROJECTILES() {
+        foreach (Projectile p in PROJECTILES) {
+            Destroy(p.gameObject);
+        }
     }
 }
