@@ -11,7 +11,7 @@ public class CloudCrafter : MonoBehaviour
 	public Vector3 	cloudPosMax = new Vector3(150, 100, 10);
 	public float 	cloudScaleMin = 1; // min scale for the clouds
 	public float 	cloudScaleMax = 3; // max scale for the clouds
-	public float 	cloudSpeedMult = 0.5f; // adjusts speed of clouds
+	public float 	cloudSpeedMult = 1f; // adjusts speed of clouds
 
 	private GameObject[] 	cloudInstances;
 
@@ -59,28 +59,5 @@ public class CloudCrafter : MonoBehaviour
     void Start()
     {
         
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        // iterate each over cloud that was created 
-        foreach (GameObject cloud in cloudInstances) {
-        	// get the cloud scale and position
-        	float scaleVal = cloud.transform.localScale.x;
-        	Vector3 cPos = cloud.transform.position;
-
-        	// move larger clouds faster
-        	cPos.x -= scaleVal * Time.deltaTime * cloudSpeedMult;
-
-        	// if a cloud has moved too far on the left
-        	if (cPos.x <= cloudPosMin.x) {
-        		// move it to the far right 
-        		cPos.x = cloudPosMax.x;
-        	}
-
-        	// apply the new position to cloud
-        	cloud.transform.position = cPos;
-        }
     }
 }

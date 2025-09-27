@@ -10,6 +10,7 @@ public class CloudCover : MonoBehaviour{
     public Vector3 maxPos = new Vector3(300, 40, 5);
     [Tooltip("For scaleRange,x is the min value, and y is the max value.")]
     public Vector2 scaleRange = new Vector2(1, 4);
+    public float speed = 1f;
 
 
     // Start is called before the first frame update
@@ -34,6 +35,24 @@ public class CloudCover : MonoBehaviour{
             cloudTrans.localScale = Vector3.one * scaleMult;
         }
         
+    }
+
+    void Update() // Update is called once per frame
+    {
+        // Basic Movement
+        Vector3 pos = transform.position;
+        pos.x += speed * Time.deltaTime;
+        if (pos.x > maxPos.x) {
+            ResetPos();
+        }
+        transform.position = pos;
+    }
+
+    Vector3 ResetPos(){
+        Vector3 pos = transform.position;
+        pos.x = minPos.x;
+        transform.position = pos;
+        return pos;
     }
 
     Vector3 RandomPos(){

@@ -18,6 +18,7 @@ public class MissionDemolition : MonoBehaviour
     public Text uitShots; // The UIText_Shots Text
     public Vector3 castlePos; // The place to put castles
     public GameObject[] castles; // An array of the castles
+    
 
     [Header("Dynamic")]
     public int level; // The current level
@@ -31,7 +32,6 @@ public class MissionDemolition : MonoBehaviour
     void Start()
     {
         S = this; // Define the private variable
-
         level = 0;
         shotsTaken = 0;
         levelMax = castles.Length;
@@ -57,6 +57,8 @@ public class MissionDemolition : MonoBehaviour
         UpdateGUI();
 
         mode = GameMode.playing;
+
+        FollowCam.SWITCH_VIEW(FollowCam.eView.both);
     }
 
     void UpdateGUI() {
@@ -71,6 +73,8 @@ public class MissionDemolition : MonoBehaviour
         // Check for level end
         if ((mode == GameMode.playing) && Goal.goalMet) {
             mode = GameMode.levelEnd;
+            // Zoom out to show both
+            FollowCam.SWITCH_VIEW(FollowCam.eView.both);
             // Start the next level in 2 seconds
             Invoke("NextLevel", 2f);
         }

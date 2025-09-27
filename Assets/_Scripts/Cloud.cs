@@ -13,6 +13,9 @@ public class Cloud : MonoBehaviour
 	public Vector2 	sphereScaleRangeY = new Vector2(3,4);
 	public Vector2 	sphereScaleRangeZ = new Vector2(2,4);
 	public float 	scaleYMin = 2f;
+	public Vector3 minPos = new Vector3(-20, -5, -5);
+    public Vector3 maxPos = new Vector3(300, 40, 5);
+	public float speed = 1f;
 
 	private List<GameObject> 	spheres;
 
@@ -49,12 +52,8 @@ public class Cloud : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
     void Update()
     {
-       // if (Input.GetKeyDown(KeyCode.Space)) {
-       // 	Restart();
-       // }
     }
 
     void Restart() {
